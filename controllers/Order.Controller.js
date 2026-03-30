@@ -41,7 +41,9 @@ const createOrder = asyncHandler(async (req, res) => {
 
       return {
         productId: p.productId,
-        price: p.price, // السعر وقت الشراء
+        price: p.price,
+        color:p.color,
+        size:p.size,
         quantity: p.quantity,
       };
     })
@@ -138,6 +140,8 @@ query.assignedDriver = req.user._id.toString();
         image: p.productId?.image
       },
       price: p.price,
+      color:p.color,
+      size:p.size,
       quantity: p.quantity
     })),
     shippingCost:order.shippingCost,
@@ -202,7 +206,9 @@ const getOrderById = asyncHandler(async (req, res) => {
         image: p.productId?.image,
         // يمكنك إضافة أي تفاصيل أخرى من مودل المنتج هنا
       },
-      price: p.price, // السعر الثابت وقت الشراء
+      price: p.price, 
+      color:p.color,
+      size:p.size,
       quantity: p.quantity,
     })),
     total: order.totalAmount,
@@ -243,7 +249,9 @@ const getMyHistory = asyncHandler(async (req, res) => {
         image: p.productId?.images?.[0] || null,
       },
       quantity: p.quantity,
-      price: p.price
+      price: p.price,
+      color:p.color,
+      size:p.size
     })),
     shippingCost:order.shippingCost,
     total: order.totalAmount
