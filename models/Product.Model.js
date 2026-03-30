@@ -39,6 +39,8 @@ const productSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    colors: [{ type: String, trim: true }],
+    sizes: [{ type: String, trim: true }],
 
     discountPrice: {
       type: Number,
@@ -75,10 +77,17 @@ const productSchema = mongoose.Schema(
 
     productType: {
       type: String,
-      enum: ["Medical", "Cosmetic"],
+      enum: [
+        "clothing",
+        "shoes",
+        "accessories",
+        "cosmetics",
+        "medical",
+        "sportswear"
+      ],
       required: true,
+      lowercase: true,
     },
-
     status: {
       type: String,
       enum: ["active", "hidden"],
@@ -94,7 +103,7 @@ const productSchema = mongoose.Schema(
     usage: { ar: { type: String, default: "" }, en: { type: String, default: "" } },
     ingredients: { ar: { type: String, default: "" }, en: { type: String, default: "" } },
     sideEffects: { ar: { type: String, default: "" }, en: { type: String, default: "" } },
-    
+
 
     notes: {
       ar: { type: String, trim: true, default: "" },

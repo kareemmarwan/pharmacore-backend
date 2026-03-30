@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-const url = "mongodb://127.0.0.1:27017/BioCare"; // ✅ ضع اسم قاعدة البيانات هنا
 
 const connectDB = async () => {
   try {
@@ -18,21 +17,3 @@ const connectDB = async () => {
 
 module.exports = connectDB;
 
-
-// mongodb+srv://<db_username>:<db_password>@cluster0.wpxuopc.mongodb.net/
-
-// const mongoose = require("mongoose");
-
-// const url = "mongodb://127.0.0.1:27017";
-
-// const connectDB = async () => {
-//   try {
-//     const conn = await mongoose.connect(url, {});
-
-//   } catch (error) {
-//     console.log(error);
-//     process.exit(1);
-//   }
-// };
-
-// module.exports = connectDB;

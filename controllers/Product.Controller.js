@@ -16,6 +16,9 @@ const formatProduct = (product, lang = "ar") => {
     name: product.name?.[lang] || product.name?.ar || "",
     brand: product.brand || "PharmaCare",
     price: product.discountPrice > 0 ? product.discountPrice : product.price,
+    colors: product.colors || [],
+    sizes: product.sizes || [],
+
     originalPrice: product.price,
     discountPrice: product.discountPrice,
     costPrice: product.costPrice,
@@ -24,7 +27,6 @@ const formatProduct = (product, lang = "ar") => {
     images: product.images || [],
     rating: product.rating || 0,
     reviewCount: product.reviewCount || 0,
-    // الوصول للاسم من خلال الحقل الصحيح في الموديل categoryId
     categoryName: product.categoryId?.name?.[lang] || "",
     categoryId: product.categoryId?._id || product.categoryId,
     inStock: product.stockQuantity > 0,
@@ -148,7 +150,7 @@ const getPublicProductById = asyncHandler(async (req, res) => {
 // @desc Create a new product
 const createProduct = asyncHandler(async (req, res) => {
   const {
-    nameAr, nameEn, categoryId, price, discountPrice, costPrice,
+    nameAr, nameEn, categoryId, price,colors,sizes ,discountPrice, costPrice,
     stockQuantity, keywords, productType, status, notesAr, notesEn,
     brand, dosageAr, dosageEn, frequencyAr, frequencyEn,
     usageAr, usageEn, ingredientsAr, ingredientsEn, sideEffectsAr, sideEffectsEn
@@ -181,6 +183,8 @@ const createProduct = asyncHandler(async (req, res) => {
     name: { ar: nameAr, en: nameEn },
     categoryId,
     price,
+    colors: colors || [],
+    sizes: sizes || [],
     discountPrice: discountPrice || 0,
     costPrice: costPrice || 0,
     stockQuantity,
@@ -241,6 +245,9 @@ const updateProduct = asyncHandler(async (req, res) => {
     },
     categoryId: req.body.categoryId || product.categoryId,
     price: req.body.price ?? product.price,
+    colors: req.body.colors ?? product.colors,
+    sizes: req.body.sizes ?? product.sizes,
+
     discountPrice: req.body.discountPrice ?? product.discountPrice,
     costPrice: req.body.costPrice ?? product.costPrice,
     stockQuantity: req.body.stockQuantity ?? product.stockQuantity,
