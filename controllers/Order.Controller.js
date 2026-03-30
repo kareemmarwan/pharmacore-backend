@@ -42,8 +42,8 @@ const createOrder = asyncHandler(async (req, res) => {
       return {
         productId: p.productId,
         price: p.price,
-        color:p.color,
-        size:p.size,
+        color: p.selectedColor || p.color, // دعم المسميين لضمان المرونة
+        size: p.selectedSize || p.size,
         quantity: p.quantity,
       };
     })
