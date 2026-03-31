@@ -18,7 +18,6 @@ const createOrder = asyncHandler(async (req, res) => {
     totalAmount,
   } = req.body;
 
-  console.log('start first steps')
 
   if (!customerName || !customerPhone || !customerAddress ||!customerEmail ||!products ||!shippingCost || !totalAmount || !customerIdNumber) {
     res.status(400);
@@ -42,7 +41,6 @@ const createOrder = asyncHandler(async (req, res) => {
       return {
         productId: p.productId,
         price:p.price,
-        color:p.color, // دعم المسميين لضمان المرونة
         size:p.size,
         quantity: p.quantity,
       };
@@ -60,7 +58,6 @@ const createOrder = asyncHandler(async (req, res) => {
     totalAmount,
     paymentProof: paymentProofPath,
     status: "pending",
-    // ملاحظة: الـ orderNumber يتم توليده تلقائياً في الـ Schema كما فعلنا سابقاً
   });
   res.status(201).json(order);
 });
@@ -140,8 +137,8 @@ query.assignedDriver = req.user._id.toString();
         image: p.productId?.image
       },
       price: p.price,
-      color:p.color,
       size:p.size,
+      color:p.color,
       quantity: p.quantity
     })),
     shippingCost:order.shippingCost,
@@ -207,8 +204,8 @@ const getOrderById = asyncHandler(async (req, res) => {
         // يمكنك إضافة أي تفاصيل أخرى من مودل المنتج هنا
       },
       price: p.price, 
-      color:p.color,
       size:p.size,
+      color:p.color,
       quantity: p.quantity,
     })),
     total: order.totalAmount,
@@ -250,8 +247,8 @@ const getMyHistory = asyncHandler(async (req, res) => {
       },
       quantity: p.quantity,
       price: p.price,
-      color:p.color,
-      size:p.size
+      size:p.size,
+      color:p.color
     })),
     shippingCost:order.shippingCost,
     total: order.totalAmount
